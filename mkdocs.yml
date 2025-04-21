@@ -1,0 +1,105 @@
+site_name: Orchard Core Commerce
+theme:
+  name: material
+  custom_dir: docs/theme
+  logo: assets/images/orchard-logo.png
+  favicon: assets/images/favicon.png
+  features:
+    - header.autohide
+    - navigation.instant
+    - navigation.tabs
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: green
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: green
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+  static_templates:
+    - 404.html
+
+extra:
+  social:
+    - icon: fontawesome/solid/leaf
+      link: https://orchardcore.net
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/OrchardCMS/OrchardCore.Commerce
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/OrchardCMS
+
+# Repository
+repo_name: OrchardCMS/OrchardCore.Commerce
+repo_url: https://github.com/OrchardCMS/OrchardCore.Commerce
+edit_uri: edit/main/src/
+
+# Extensions
+markdown_extensions:
+  - markdown.extensions.admonition
+  - markdown.extensions.codehilite
+  - markdown.extensions.def_list
+  - markdown.extensions.footnotes
+  - markdown.extensions.meta
+  - pymdownx.b64
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji
+  - pymdownx.magiclink
+  - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      check_paths: true
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.tasklist
+  - pymdownx.tilde
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+  - git-authors
+  - git-revision-date-localized
+  - exclude:
+      glob:
+        # Excluding the large node folder with all its MD files. We can't exclude everything apart from docs because there are links to e.g. C# files too.
+        - "*node_modules*"
+
+# Page tree
+nav:
+  - About: index.md
+  - Guides:
+    - Creating a simple webshop: guides/create-webshop.md
+  - Key Features:
+    - Inventory: features/inventory.md
+    - Products and Prices: features/products-and-prices.md
+    - Promotions: features/promotions.md
+    - Payment Providers:
+      - Overview: features/payment-providers.md
+      - Exactly® Payment: features/exactly-payment.md
+      - Stripe Payment: features/stripe-payment.md
+    - Taxation: features/taxation.md
+    - User Features: features/user-features.md
+    - Workflows: features/workflows.md
+  - Parts and Fields:
+    - Parts:
+      - ProductPart: features/product-part.md
+      - PricePart: features/price-part.md
+      - PriceVariantsPart: features/price-variants-part.md
+      - TieredPricePart: features/tiered-price-part.md
+      - InventoryPart: features/inventory-part.md
+    - Fields:
+      - TextProductAttributeField: features/text-product-attribute-field.md
+      - BooleanProductAttributeField: features/boolean-product-attribute-field.md
+      - NumericProductAttributeField: features/numeric-product-attribute-field.md
+  - Resources:
+    - Libraries: resources/libraries/README.md
+  - Releases and Notes:
+    - 3.0.0: releases/3.0.0.md
+    - GitHub: https://github.com/OrchardCMS/OrchardCore.Commerce/releases

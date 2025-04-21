@@ -1,0 +1,50 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
+
+    <!-- The Orchard Core version should always be x.y.0 of the latest minor version for maximum compatibility when
+         distributed as NuGet packages. On the other hand, the consuming projects (including OrchardCore.Commerce.Web)
+         should use Orchard Core references for the latest patch version to pull all versions up in the final app. -->
+    <OrchardCoreVersion>2.1.0</OrchardCoreVersion>
+
+    <LombiqHelpfulLibrariesVersion>12.1.0</LombiqHelpfulLibrariesVersion>
+    <LombiqTestsUIVersion>12.1.1-alpha.14.osoe-1057</LombiqTestsUIVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageVersion Include="Lombiq.Analyzers.OrchardCore" Version="5.2.0" />
+    <PackageVersion Include="Lombiq.HelpfulLibraries.OrchardCore" Version="$(LombiqHelpfulLibrariesVersion)" />
+    <PackageVersion Include="Lombiq.HelpfulLibraries.AspNetCore" Version="$(LombiqHelpfulLibrariesVersion)" />
+    <PackageVersion Include="Lombiq.HelpfulLibraries.Refit" Version="$(LombiqHelpfulLibrariesVersion)" />
+    <PackageVersion Include="Lombiq.NodeJs.Extensions" Version="2.1.3" />
+    <PackageVersion Include="Lombiq.Tests" Version="4.0.1-alpha.1.osoe-935" />
+    <PackageVersion Include="Lombiq.Tests.UI" Version="$(LombiqTestsUIVersion)" />
+    <PackageVersion Include="Lombiq.Tests.UI.AppExtensions" Version="$(LombiqTestsUIVersion)" />
+    <PackageVersion Include="Lombiq.Tests.UI.Shortcuts" Version="$(LombiqTestsUIVersion)" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
+    <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageVersion Include="OrchardCore.Application.Cms.Targets" Version="$(OrchardCoreVersion)" />
+    <PackageVersion Include="OrchardCore.ContentFields" Version="$(OrchardCoreVersion)" />
+    <PackageVersion Include="OrchardCore.ContentManagement" Version="$(OrchardCoreVersion)" />
+    <PackageVersion Include="OrchardCore.ContentManagement.Abstractions" Version="$(OrchardCoreVersion)" />
+    <PackageVersion Include="OrchardCore.ContentTypes" Version="$(OrchardCoreVersion)" />
+    <PackageVersion Include="OrchardCore.ContentTypes.Abstractions" Version="$(OrchardCoreVersion)" />
+    <PackageVersion Include="OrchardCore.Flows" Version="$(OrchardCoreVersion)" />
+    <PackageVersion Include="OrchardCore.Html" Version="$(OrchardCoreVersion)" />
+    <PackageVersion Include="OrchardCore.Indexing.Abstractions" Version="$(OrchardCoreVersion)" />
+    <PackageVersion Include="OrchardCore.Localization" Version="$(OrchardCoreVersion)" />
+    <PackageVersion Include="OrchardCore.Logging.NLog" Version="$(OrchardCoreVersion)" />
+    <PackageVersion Include="OrchardCore.Module.Targets" Version="$(OrchardCoreVersion)" />
+    <PackageVersion Include="OrchardCore.Navigation.Core" Version="$(OrchardCoreVersion)" />
+    <PackageVersion Include="OrchardCore.Settings" Version="$(OrchardCoreVersion)" />
+    <PackageVersion Include="OrchardCore.Templates" Version="$(OrchardCoreVersion)" />
+    <PackageVersion Include="OrchardCore.Title" Version="$(OrchardCoreVersion)" />
+    <PackageVersion Include="OrchardCore.Workflows.Abstractions" Version="$(OrchardCoreVersion)" />
+    <PackageVersion Include="Shouldly" Version="4.3.0" />
+    <PackageVersion Include="Stripe.net" Version="48.0.2" />
+    <PackageVersion Include="System.Text.Json" Version="9.0.4" />
+    <PackageVersion Include="xunit.v3" Version="2.0.1" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.2" />
+  </ItemGroup>
+</Project>

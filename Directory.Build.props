@@ -1,0 +1,25 @@
+<Project>
+  <!-- Uncomment this to run .NET static code analyzers during rebuilds. -->
+  <!--<PropertyGroup>
+    <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+  </PropertyGroup>-->
+
+  <ItemGroup>
+    <PackageReference Condition="!Exists($(LombiqAnalyzersPath))" Include="Lombiq.Analyzers.OrchardCore">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <!-- Copying the Orchard logo as an icon to all NuGet-published projects. -->
+  <Target Name="Copy NuGet icon"
+          AfterTargets="AfterResolveReferences"
+          Condition="'$(PackageIcon)' == 'OrchardCoreIcon.png' AND !Exists('$(ProjectDir)OrchardCoreIcon.png')">
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)OrchardCoreIcon.png"
+          DestinationFiles="$(ProjectDir)OrchardCoreIcon.png"
+          SkipUnchangedFiles="true" />
+  </Target>
+
+  <!-- Inherit parent props file if one exists. -->
+  <Import Condition="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../')) != ''"
+          Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+</Project>
