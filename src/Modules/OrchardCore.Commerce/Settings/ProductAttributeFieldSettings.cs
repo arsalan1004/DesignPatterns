@@ -136,3 +136,39 @@ public class TextProductAttributeFieldSettings
         target.MultipleValues = MultipleValues;
     }
 }
+
+/// <summary>
+/// Settings for the color product attribute.
+/// </summary>
+public class ColorProductAttributeFieldSettings : ProductAttributeFieldSettings<string>, ICopier<ColorProductAttributeFieldSettings>
+{
+    /// <summary>
+    /// Gets or sets a value indicating whether a value is required.
+    /// </summary>
+    public bool Required { get; set; }
+
+    /// <summary>
+    /// Gets or sets the hint to display when the input is empty.
+    /// </summary>
+    public string Placeholder { get; set; }
+
+    /// <summary>
+    /// Gets or sets the set of predefined colors.
+    /// </summary>
+    public IEnumerable<string> PredefinedColors { get; set; } = Enumerable.Empty<string>();
+
+    /// <summary>
+    /// Gets or sets a value indicating whether values should be restricted to the set of predefined colors.
+    /// </summary>
+    public bool RestrictToPredefinedColors { get; set; }
+
+    public void CopyTo(ColorProductAttributeFieldSettings target)
+    {
+        ((ProductAttributeFieldSettings<string>)this).CopyTo(target);
+
+        target.Required = Required;
+        target.Placeholder = Placeholder;
+        target.PredefinedColors = PredefinedColors;
+        target.RestrictToPredefinedColors = RestrictToPredefinedColors;
+    }
+}

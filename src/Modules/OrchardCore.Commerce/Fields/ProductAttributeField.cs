@@ -47,3 +47,10 @@ public class NumericProductAttributeField : ProductAttributeField<NumericProduct
 public class TextProductAttributeField : ProductAttributeField<TextProductAttributeFieldSettings>
 {
 }
+
+/// <summary>
+/// A color product attribute.
+/// </summary>
+public class ColorProductAttributeField : ProductAttributeField<ColorProductAttributeFieldSettings>
+{
+}
