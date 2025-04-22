@@ -8,26 +8,27 @@ using OrchardCore.DisplayManagement.Views;
 
 namespace OrchardCore.Commerce.Drivers;
 
-public abstract class ProductAttributeFieldDriver<TField, TFieldSettings> : ContentFieldDisplayDriver<TField>
-    where TField : ProductAttributeField, new()
-    where TFieldSettings : ProductAttributeFieldSettings, new()
+public class ProductAttributeFieldDriver : ContentFieldDisplayDriver<ProductAttributeField>
 {
-    public IStringLocalizer T { get; set; }
+    private readonly IStringLocalizer<ProductAttributeFieldDriver> _localizer;
 
-    protected ProductAttributeFieldDriver(
-        IStringLocalizer<ProductAttributeFieldDriver<TField, TFieldSettings>> localizer) =>
-        T = localizer;
+    public ProductAttributeFieldDriver(IStringLocalizer<ProductAttributeFieldDriver> localizer)
+    {
+        _localizer = localizer;
+    }
 
-    public override IDisplayResult Edit(TField field, BuildFieldEditorContext context) =>
-        Initialize<EditProductAttributeFieldViewModel<TField, TFieldSettings>>(
-            GetEditorShapeType(context), model =>
+    public override IDisplayResult Edit(ProductAttributeField field, BuildFieldEditorContext context)
+    {
+        return Initialize<EditProductAttributeFieldViewModel>(
+            GetEditorShapeType(context),
+            model =>
             {
-                var settings = new TFieldSettings();
                 model.Field = field;
-                model.Settings = settings;
+                model.Settings = field.Settings;
                 model.Part = context.ContentPart;
                 model.PartFieldDefinition = context.PartFieldDefinition;
             });
+    }
 }
 
 public class BooleanProductAttributeFieldDriver

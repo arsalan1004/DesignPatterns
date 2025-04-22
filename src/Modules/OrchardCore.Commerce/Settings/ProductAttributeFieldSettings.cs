@@ -1,138 +1,128 @@
-using Lombiq.HelpfulLibraries.Common.Utilities;
-using OrchardCore.Commerce.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OrchardCore.Commerce.Settings;
-
-/// <summary>
-/// A base class for product attribute settings.
-/// </summary>
-public abstract class ProductAttributeFieldSettings : ICopier<ProductAttributeFieldSettings>
+namespace OrchardCore.Commerce.Settings
 {
-    /// <summary>
-    /// Gets or sets the description text to display for this attribute in the product page.
-    /// </summary>
-    public string Hint { get; set; }
-
-    public void CopyTo(ProductAttributeFieldSettings target) => target.Hint = Hint;
-}
-
-/// <summary>
-/// A typed base class for product attribute settings.
-/// </summary>
-public abstract class ProductAttributeFieldSettings<T> : ProductAttributeFieldSettings, ICopier<ProductAttributeFieldSettings<T>>
-{
-    /// <summary>
-    /// Gets or sets the default value associated with this attribute.
-    /// </summary>
-    public T DefaultValue { get; set; }
-
-    public void CopyTo(ProductAttributeFieldSettings<T> target)
+    // Removed the common base class and interface to create separate, disconnected classes
+    public enum AttributeType
     {
-        ((ICopier<ProductAttributeFieldSettings>)this).CopyTo(target);
-        target.DefaultValue = DefaultValue;
+        Boolean,
+        Numeric,
+        Text,
+        Date
     }
-}
 
-/// <summary>
-/// Settings for the Boolean product attribute.
-/// </summary>
-public class BooleanProductAttributeFieldSettings : ProductAttributeFieldSettings<bool>, ICopier<BooleanProductAttributeFieldSettings>
-{
-    /// <summary>
-    /// Gets or sets the text associated to the checkbox for this attribute in the product page.
-    /// </summary>
-    public string Label { get; set; }
-
-    public void CopyTo(BooleanProductAttributeFieldSettings target)
+    // Each class now contains duplicated properties and methods
+    public class BooleanProductAttributeFieldSettings
     {
-        ((ProductAttributeFieldSettings<bool>)this).CopyTo(target);
-        target.Label = Label;
+        public string Hint { get; set; }
+        public AttributeType Type { get; set; }
+        public string Label { get; set; }
+        public bool DefaultValue { get; set; }
+
+        // Duplicated copy logic without any inheritance
+        public void CopyTo(BooleanProductAttributeFieldSettings target)
+        {
+            if (target == null) return;
+            target.Hint = this.Hint;
+            target.Type = this.Type;
+            target.Label = this.Label;
+            target.DefaultValue = this.DefaultValue;
+        }
     }
-}
 
-/// <summary>
-/// Settings for the numeric product attribute.
-/// </summary>
-public class NumericProductAttributeFieldSettings : ProductAttributeFieldSettings<decimal?>, ICopier<NumericProductAttributeFieldSettings>
-{
-    /// <summary>
-    /// Gets or sets a value indicating whether a value is required.
-    /// </summary>
-    public bool Required { get; set; }
-
-    /// <summary>
-    /// Gets or sets the hint to display when the input is empty.
-    /// </summary>
-    public string Placeholder { get; set; }
-
-    /// <summary>
-    /// Gets or sets the number of digits after the decimal point.
-    /// </summary>
-    public int DecimalPlaces { get; set; }
-
-    /// <summary>
-    /// Gets or sets the minimum value allowed.
-    /// </summary>
-    public decimal? Minimum { get; set; }
-
-    /// <summary>
-    /// Gets or sets the maximum value allowed.
-    /// </summary>
-    public decimal? Maximum { get; set; }
-
-    public void CopyTo(NumericProductAttributeFieldSettings target)
+    public class NumericProductAttributeFieldSettings
     {
-        ((ProductAttributeFieldSettings<decimal?>)this).CopyTo(target);
+        // Duplicated common properties
+        public string Hint { get; set; }
+        public AttributeType Type { get; set; }
+        
+        public bool Required { get; set; }
+        public string Placeholder { get; set; }
+        public int DecimalPlaces { get; set; }
+        public decimal? Minimum { get; set; }
+        public decimal? Maximum { get; set; }
+        public decimal? DefaultValue { get; set; }
 
-        target.Required = Required;
-        target.Placeholder = Placeholder;
-        target.DecimalPlaces = DecimalPlaces;
-        target.Minimum = Minimum;
-        target.Maximum = Maximum;
+        // Duplicated copy logic
+        public void CopyTo(NumericProductAttributeFieldSettings target)
+        {
+            if (target == null) return;
+            target.Hint = this.Hint;
+            target.Type = this.Type;
+            target.Required = this.Required;
+            target.Placeholder = this.Placeholder;
+            target.DecimalPlaces = this.DecimalPlaces;
+            target.Minimum = this.Minimum;
+            target.Maximum = this.Maximum;
+            target.DefaultValue = this.DefaultValue;
+        }
     }
-}
 
-/// <summary>
-/// Settings for the text product attribute.
-/// </summary>
-public class TextProductAttributeFieldSettings
-    : ProductAttributeFieldSettings<string>, IPredefinedValuesProductAttributeFieldSettings, ICopier<TextProductAttributeFieldSettings>
-{
-    /// <summary>
-    /// Gets or sets a value indicating whether a value is required.
-    /// </summary>
-    public bool Required { get; set; }
-
-    /// <summary>
-    /// Gets or sets the hint to display when the input is empty.
-    /// </summary>
-    public string Placeholder { get; set; }
-
-    /// <summary>
-    /// Gets or sets the set of suggested or allowed values.
-    /// </summary>
-    public IEnumerable<object> PredefinedValues { get; set; } = Enumerable.Empty<string>();
-
-    /// <summary>
-    /// Gets or sets a value indicating whether values should be restricted to the set of predefined values.
-    /// </summary>
-    public bool RestrictToPredefinedValues { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether multiple values can be selected.
-    /// </summary>
-    public bool MultipleValues { get; set; }
-
-    public void CopyTo(TextProductAttributeFieldSettings target)
+    public class TextProductAttributeFieldSettings
     {
-        ((ProductAttributeFieldSettings<string>)this).CopyTo(target);
+        // Duplicated common properties
+        public string Hint { get; set; }
+        public AttributeType Type { get; set; }
 
-        target.Required = Required;
-        target.Placeholder = Placeholder;
-        target.PredefinedValues = PredefinedValues;
-        target.RestrictToPredefinedValues = RestrictToPredefinedValues;
-        target.MultipleValues = MultipleValues;
+        public bool Required { get; set; }
+        public string Placeholder { get; set; }
+        public IEnumerable<object> PredefinedValues { get; set; }
+        public bool RestrictToPredefinedValues { get; set; }
+        public bool MultipleValues { get; set; }
+        public string DefaultValue { get; set; }
+
+        public TextProductAttributeFieldSettings()
+        {
+            PredefinedValues = Enumerable.Empty<string>();
+        }
+
+        // Duplicated copy logic
+        public void CopyTo(TextProductAttributeFieldSettings target)
+        {
+            if (target == null) return;
+            target.Hint = this.Hint;
+            target.Type = this.Type;
+            target.Required = this.Required;
+            target.Placeholder = this.Placeholder;
+            target.PredefinedValues = this.PredefinedValues;
+            target.RestrictToPredefinedValues = this.RestrictToPredefinedValues;
+            target.MultipleValues = this.MultipleValues;
+            target.DefaultValue = this.DefaultValue;
+        }
     }
-}
+
+    public class DateProductAttributeFieldSettings
+    {
+        // Duplicated common properties
+        public string Hint { get; set; }
+        public AttributeType Type { get; set; }
+
+        public bool Required { get; set; }
+        public string Placeholder { get; set; }
+        public DateTime? MinimumDate { get; set; }
+        public DateTime? MaximumDate { get; set; }
+        public string DateFormat { get; set; }
+        public DateTime? DefaultValue { get; set; }
+
+        public DateProductAttributeFieldSettings()
+        {
+            DateFormat = "yyyy-MM-dd";
+        }
+
+        // Duplicated copy logic
+        public void CopyTo(DateProductAttributeFieldSettings target)
+        {
+            if (target == null) return;
+            target.Hint = this.Hint;
+            target.Type = this.Type;
+            target.Required = this.Required;
+            target.Placeholder = this.Placeholder;
+            target.MinimumDate = this.MinimumDate;
+            target.MaximumDate = this.MaximumDate;
+            target.DateFormat = this.DateFormat;
+            target.DefaultValue = this.DefaultValue;
+        }
+    }
+} 

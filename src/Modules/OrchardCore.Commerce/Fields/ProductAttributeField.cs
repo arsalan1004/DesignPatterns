@@ -2,16 +2,44 @@ using Lombiq.HelpfulLibraries.Common.Utilities;
 using OrchardCore.Commerce.Settings;
 using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Metadata.Models;
-using System.Diagnostics.CodeAnalysis;
+using System;
 
 namespace OrchardCore.Commerce.Fields;
 
-[SuppressMessage(
-    "Minor Code Smell",
-    "S2094:Classes should not be empty",
-    Justification = "Intermediate ancestor class to group together attribute fields.")]
-public abstract class ProductAttributeField : ContentField
+/// <summary>
+/// Represents a product attribute field that can be of different types (Boolean, Numeric, Text, Date).
+/// </summary>
+public class ProductAttributeField : ContentField
 {
+    /// <summary>
+    /// Gets or sets the type of the attribute.
+    /// </summary>
+    public AttributeType Type { get; set; }
+
+    /// <summary>
+    /// Gets or sets the settings for the attribute.
+    /// </summary>
+    public ProductAttributeFieldSettings Settings { get; set; }
+
+    /// <summary>
+    /// Gets the settings of the specified type.
+    /// </summary>
+    public TSettings GetSettings<TSettings>(ContentPartFieldDefinition partFieldDefinition)
+        where TSettings : ProductAttributeFieldSettings, ICopier<TSettings>, new()
+    {
+        return partFieldDefinition.GetSettings<TSettings>();
+    }
+}
+
+/// <summary>
+/// Defines the possible types of product attributes.
+/// </summary>
+public enum AttributeType
+{
+    Boolean,
+    Numeric,
+    Text,
+    Date
 }
 
 /// <summary>
@@ -23,8 +51,6 @@ public abstract class ProductAttributeField : ContentField
 public abstract class ProductAttributeField<TSettings> : ProductAttributeField
     where TSettings : ProductAttributeFieldSettings, ICopier<TSettings>, new()
 {
-    public TSettings GetSettings(ContentPartFieldDefinition partFieldDefinition) =>
-        partFieldDefinition.GetSettings<TSettings>();
 }
 
 /// <summary>
