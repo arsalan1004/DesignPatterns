@@ -93,6 +93,10 @@ public class Startup : StartupBase
             .UseDisplayDriver<TextProductAttributeFieldDriver>();
         services.AddScoped<IContentPartFieldDefinitionDisplayDriver, TextProductAttributeFieldSettingsDriver>();
 
+        services.AddContentField<DateProductAttributeField>()
+            .UseDisplayDriver<DateProductAttributeFieldDriver>();
+        services.AddScoped<IContentPartFieldDefinitionDisplayDriver, DateProductAttributeFieldSettingsDriver>();
+
         services.AddScoped<IProductAttributeProvider, ProductAttributeProvider>();
         services.AddScoped<IProductAttributeProvider, TextProductAttributeProvider>();
         services.AddScoped<IProductAttributeProvider, BooleanProductAttributeProvider>();
