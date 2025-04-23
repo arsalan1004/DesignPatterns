@@ -62,3 +62,13 @@ public class TextProductAttributeFieldDriver
     {
     }
 }
+
+public class DateProductAttributeFieldDriver
+    : ProductAttributeFieldDriver<DateProductAttributeField, DateProductAttributeFieldSettings>
+{
+    public DateProductAttributeFieldDriver(
+        IStringLocalizer<DateProductAttributeFieldDriver> localizer)
+        : base(localizer)
+    {
+    }
+}

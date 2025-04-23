@@ -41,6 +41,11 @@ public class NumericProductAttributeFieldSettingsDriver
 {
 }
 
+public class DateProductAttributeFieldSettingsDriver
+    : ProductAttributeFieldSettingsDriver<DateProductAttributeField, DateProductAttributeFieldSettings>
+{
+}
+
 public class TextProductAttributeFieldSettingsDriver
     : ProductAttributeFieldSettingsDriver<TextProductAttributeField, TextProductAttributeFieldSettings>
 {

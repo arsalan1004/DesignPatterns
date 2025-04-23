@@ -23,6 +23,8 @@ public class PrioritizedPrice
     /// </summary>
     public Amount Price { get; }
 
+    public int? QuantityThreshold { get;}
+
     private string DebuggerDisplay => string.Create(CultureInfo.InvariantCulture, $"{Price} ^{Priority}");
 
     public PrioritizedPrice(int priority, Amount price)
